@@ -17,8 +17,14 @@ public abstract class BiomeDecoratorSpace
     protected int chunkX;
     protected int chunkZ;
 
+    private boolean isDecorating;
+
     public void decorate(World world, Random random, int chunkX, int chunkZ)
     {
+
+        if (isDecorating) return;
+        isDecorating = true;
+
         if (this.getCurrentWorld() != null)
         {
             throw new RuntimeException("Already decorating!!");
@@ -35,6 +41,9 @@ public abstract class BiomeDecoratorSpace
             this.setCurrentWorld(null);
             this.rand = null;
         }
+
+        isDecorating = false;
+
     }
 
     protected abstract void setCurrentWorld(World world);
